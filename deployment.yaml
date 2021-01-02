@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: e-commerce-frontend
+labels:
+  app: e-commerce-frontend
+spec:
+strategy:
+  type: Recreate
+template:
+  metadata:
+    labels:
+      app: e-commerce-frontend
+      tier: e-commerce-frontend
+  spec:
+    containers:
+      - name: e-commerce-frontend
+        image: mendozanmartin/e-commerce-frontend:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+            name: e-commerce-frontend
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+name: e-commerce-frontend
+labels:
+  app: e-commerce-frontend
+spec:
+ports:
+  - port: 3000
+    targetPort: 80
+selector:
+  app: e-commerce-frontend
+  tier: e-commerce-frontend
+type: LoadBalancer
