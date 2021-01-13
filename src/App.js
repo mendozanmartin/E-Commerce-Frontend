@@ -6,23 +6,24 @@ import React, { useState, useEffect } from "react";
 function App() {
   let [clothingItems, setClothingItems] = useState([]);
 
-  useEffect(()=> {
-
+  useEffect(() => {
     const getItems = async () => {
       await axios({
         method: "GET",
-        url: 'http://localhost:5000/get-items',
+        url: "http://localhost:5000/get-items",
         headers: {
-          "content-type": "application/json"
-        }
-      }).then((response) => {
-        setClothingItems(response.data)
-      }).catch((error) => {
-        console.log(error)
+          "content-type": "application/json",
+        },
       })
-    }
-    getItems()
-  }, [clothingItems, setClothingItems])
+        .then((response) => {
+          setClothingItems(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getItems();
+  }, [clothingItems, setClothingItems]);
 
   const items = [
     {
@@ -61,7 +62,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Commercify</h1>
+      <h1>MFC Admin Portal</h1>
       <div className="container">
         <div className="row">
           {clothingItems.map((item, i) => (
@@ -70,7 +71,7 @@ function App() {
                 <h3>{item.title}</h3>
                 <p> {item.description}</p>
                 <div className="d-flex justify-content-center">
-                <img src={item.image} style={{ maxWidth: "150px" }}></img>
+                  <img src={item.image} style={{ maxWidth: "150px" }}></img>
                 </div>
               </div>
             </div>
