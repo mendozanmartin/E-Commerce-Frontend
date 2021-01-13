@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'commercify'
-        CLUSTER_NAME = 'jenkins-ci-cd'
-        LOCATION = 'us-east1-d'
+        CLUSTER_NAME = 'my-first-cluster1'
+        LOCATION = 'us-central-1c'
         CREDENTIALS_ID = 'gke'
     }
     stages {
